@@ -7,25 +7,25 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Table(name = "film")  // Имя таблицы в базе данных
+@Table(name = "film")  
 public class Film extends AbstractEntity {
 
-    @Column(name = "title") // Имя столбца в таблице
+    @Column(name = "title") 
     private String title;
 
-    @Column(name = "release_year") // Имя столбца в таблице
+    @Column(name = "release_year") 
     private int releaseYear;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "film_actor", // Имя существующей таблицы-связки
-            joinColumns = @JoinColumn(name = "film_id"), // Внешний ключ для Film
-            inverseJoinColumns = @JoinColumn(name = "actor_id") // Внешний ключ для Actor
+            name = "film_actor", 
+            joinColumns = @JoinColumn(name = "film_id"), 
+            inverseJoinColumns = @JoinColumn(name = "actor_id") 
     )
     private List<Actor> actors = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "director_id") // Внешний ключ для Director
+    @JoinColumn(name = "director_id") 
     private Director director;
 
     public Film(int id, String title, int releaseYear, List<Actor> actors, Director director) {
