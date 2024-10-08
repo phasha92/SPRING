@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +26,20 @@ public abstract class AbstractEntity {
     }
 
     public void setId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("Id must be positive");
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractEntity entity = (AbstractEntity) o;
+        return id == entity.id;
     }
 
 }

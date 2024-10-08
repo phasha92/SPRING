@@ -1,9 +1,6 @@
-package org.example.model;
+package org.example.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,10 +10,10 @@ import java.util.List;
 @Table(name = "actor")
 public class Actor extends AbstractEntity {
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "actor")
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
     private List<Film> films = new ArrayList<>();
 
     public Actor(int id, String name, List<Film> films) {
@@ -40,22 +37,8 @@ public class Actor extends AbstractEntity {
         this.films = films != null ? films : new ArrayList<>();
     }
 
-    // Возвращаем неизменяемый список
     public List<Film> getFilms() {
-        return Collections.unmodifiableList(films);  // Возвращаем неизменяемый список
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Actor actor = (Actor) o;
-        return id == actor.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(id);
+        return Collections.unmodifiableList(films);
     }
 
     @Override
