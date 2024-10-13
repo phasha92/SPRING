@@ -1,0 +1,20 @@
+<configuration>
+    <!-- Консольный аппендер для вывода логов в консоль -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Формат сообщения: дата, уровень, логгер и само сообщение -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Логгер для пакета "com.example", уровень логирования DEBUG -->
+    <logger name="com.example" level="debug">
+        <!-- Чтобы этот логгер также выводил логи в консоль -->
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- Корневой логгер с уровнем INFO, выводящий в консоль -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
